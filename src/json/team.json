@@ -1,0 +1,44 @@
+
+[
+    {
+        "//field": "GET MATCHES BY TEAM ID (VISTA MANAGER-->?)",
+
+        "matchByTeam" : [
+            {
+                "local_team": "Amazings",
+                "visitor_team": "Super Cools",
+                "date": "2020-07-31",
+                "local_goals": 2,
+                "visitor_goals": 3
+            },
+            {
+                "local_team": "The Bests",
+                "visitor_team": "Seriously",
+                "date": "2020-07-30",
+                "local_goals": 1,
+                "visitor_goals": 2
+            },
+            {
+                "local_team": "You",
+                "visitor_team": "I",
+                "date": "2020-07-30",
+                "local_goals": 7,
+                "visitor_goals": 3
+            },
+            {
+                "local_team": "Test",
+                "visitor_team": "Testing",
+                "date": "2020-07-30",
+                "local_goals": 0,
+                "visitor_goals": -2
+            },
+            {
+                "local_team": "Me",
+                "visitor_team": "Myself",
+                "date": "2020-07-30",
+                "local_goals": 11,
+                "visitor_goals": "a"
+            }
+        ]
+    }
+] 
