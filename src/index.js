@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Landing from './components/landingPage/landing.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Landing />
+    <Router>
+      <Landing />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
