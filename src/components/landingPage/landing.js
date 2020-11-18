@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import App from '../../App';
-import ApiSoccer from '../api/ApiSoccer';
 import './landing.css';
 
 class Landing extends Component {
@@ -22,7 +21,6 @@ class Landing extends Component {
   
     handleSubmit = (event) => {
 
-         <ApiSoccer />;
 
         //const email = "ecomes@soccer.com";
         //const password = "ecomes_soccer";
