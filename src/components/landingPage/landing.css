@@ -75,3 +75,24 @@
     border: 5px solid #FFB01F; 
     color: #fff;
 }
+
+.loginForm button:disabled {
+    opacity: 0.5;
+    background-color: #ffffff;
+    border: 5px solid #FFB01F; 
+    color: #FFB01F;
+}
+
+.formErrors {
+    width: 100%;
+    text-align: right;
+    color: red;
+    font-size: 12px;
+    margin-top: 15px;
+    margin-right: 10px;
+    float: right;
+}
+
+.formErrors p{
+    margin-bottom: 5px;
+}
