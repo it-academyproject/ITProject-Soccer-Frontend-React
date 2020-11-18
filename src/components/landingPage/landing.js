@@ -18,13 +18,8 @@ class Landing extends Component {
         }
     }
 
-  
     handleSubmit = (event) => {
-
-
-        //const email = "ecomes@soccer.com";
-        //const password = "ecomes_soccer";
-
+        
         const email = this.state.username;
         const password = this.state.password;
 
@@ -39,15 +34,20 @@ class Landing extends Component {
                 "password": `${password}`
             })
         }).then(response => response.json())
-            .then(data =>
-                this.setState({
-                    data: data,
-                    token: data.Token,
-                    message: data.message,
-                    success: data.success,
-                    team_id: data.team_id,
-                    type_user: data.type_user,
-                }));
+            .then(data => {
+                if (data.success) {
+                    this.setState({
+                        data: data,
+                        token: data.Token,
+                        message: data.message,
+                        success: data.success,
+                        team_id: data.team_id,
+                        type_user: data.type_user,
+                    })
+                }else{
+                    alert(data.message)
+                }
+            });
         event.preventDefault();
     };
 
