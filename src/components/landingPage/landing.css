@@ -86,7 +86,7 @@
 .formErrors {
     width: 100%;
     text-align: right;
-    color: red;
+    color: #ff2d1f;
     font-size: 12px;
     margin-top: 15px;
     margin-right: 10px;
@@ -95,4 +95,9 @@
 
 .formErrors p{
     margin-bottom: 5px;
+}
+
+.loginForm .formControl.has-error{
+    border: 1px solid #ff2d1f;
+    box-shadow: 1px 1px 7px 0px #ff2d1f;
 }

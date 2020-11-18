@@ -36,7 +36,7 @@ class Landing extends Component {
             switch(fieldName) {
               case 'username':
                 usernameValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-                fieldValidationErrors.username = usernameValid ? '' : ' is invalid';
+                fieldValidationErrors.username = usernameValid ? '' : ' should be an email';
                 break;
               case 'password':
                 passwordValid = value.length >= 8;
@@ -52,9 +52,13 @@ class Landing extends Component {
                           }, this.validateForm);
         }
           
-          validateForm() {
+        validateForm() {
             this.setState({formValid: this.state.usernameValid && this.state.passwordValid});
-          }
+        }
+
+        errorClass(error) {
+            return(error.length === 0 ? '' : 'has-error');
+        }
 
         render () {
             return (
@@ -67,12 +71,12 @@ class Landing extends Component {
                             <Form className="loginForm">
                                 <Form.Group>
                                     <Form.Label className="formLabel">username</Form.Label>
-                                    <Form.Control type="email" required placeholder="enter your username" name="username" className="formControl" value={this.state.username} onChange={(event) => this.handleChange(event)}/>
+                                    <Form.Control type="email" required placeholder="enter your username" name="username" className={`formControl ${this.errorClass(this.state.formErrors.username)}`} value={this.state.username} onChange={(event) => this.handleChange(event)}/>
                                 </Form.Group>
         
                                 <Form.Group>
                                     <Form.Label className="formLabel">password</Form.Label>
-                                    <Form.Control as="input" type="password" required placeholder="password" name="password" className="formControl" value={this.state.password} onChange={(event) => this.handleChange(event)}/>
+                                    <Form.Control as="input" type="password" required placeholder="password" name="password" className={`formControl ${this.errorClass(this.state.formErrors.password)}`} value={this.state.password} onChange={(event) => this.handleChange(event)}/>
                                     <Form.Text className="text-muted">
                                         <a href="#">you forgot the password?</a>
                                     </Form.Text>
