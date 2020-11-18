@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
-import App from '../../App';
+import LayoutContainer from '../layout/LayoutContainer';
 import './landing.css';
 
 class Landing extends Component {
@@ -19,7 +19,7 @@ class Landing extends Component {
     }
 
     handleSubmit = (event) => {
-        
+
         const email = this.state.username;
         const password = this.state.password;
 
@@ -71,7 +71,7 @@ class Landing extends Component {
     render() {
         if (this.state.success) {
             return (
-                <App
+                <LayoutContainer
                     type_user={this.state.type_user}
                     username={this.state.username}
                     onClick={this.handleOnClick}
