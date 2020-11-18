@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Col, Container, Row, Button } from 'react-bootstrap';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import LayoutNavbar from './components/layout/LayoutNavbar';
 import AdminUsers from './components/admin/AdminUsers';
 import AdminUsersSingle from './components/admin/AdminUsersSingle';
@@ -14,24 +14,24 @@ import ManagerMatches from './components/manager/ManagerMatches';
 import ManagerPlayers from './components/manager/ManagerPlayers';
 import ManagerTeam from './components/manager/ManagerTeam';
 import ManagerStats from './components/manager/ManagerStats';
+import Landing from './components/landingPage/landing'
 
 class App extends Component {
-  state = {
-    user: null
-  };
-
-  componentDidUpdate() {
-    console.log(this.state.user);
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: this.props.type_user,
+      username: this.props.username,
+    };
   }
 
-  handleOnClick = (event) => {
-    this.setState({
-      user: event.target.value
-    });
-    console.log("Dentro de handleOnClick " + event.target.value);
-    //console.log(this.state.user);
+  renderRedirect = () => {
+    if(this.state.user === "MANAGER"){
+      return (<Redirect  to="/managerTeam" />);
+    }else if(this.state.user === "ADMIN"){
+      return (<Redirect  to="/adminPlayers" />);
+    }
   }
-
   render() {
     return (
       <Container className="p-4" fluid>
@@ -48,19 +48,20 @@ class App extends Component {
               </Row>
             </Col>
             <Col xs={4} className="text-center text-white border">
-              <h3 className="pt-4">User select: {this.state.user}</h3>
-              <Link to="/home">
-                <Button type="button" value="Admin" onClick={this.handleOnClick} className="button" variant="warning">Admin</Button>
-                <Button type="button" value="Manager" onClick={this.handleOnClick} className="button" variant="danger">Manager</Button>
+              <h3 className="pt-4">{this.state.username}</h3>
+              <Link to="/landing">
+                <Button type="button" value="Manager" onClick={this.props.onClick} className="button" variant="danger">Logout</Button>
               </Link>
             </Col>
           </Row>
         </header>
         <section>
           <Row>
-            <Col xs={12} className="bg-dark text-white text-center" style={{ minHeight:715 }}>
+            <Col xs={12} className="bg-dark text-white text-center" style={{ minHeight: 715 }}>
               <h1 className="p-3">Layout Component Selected</h1>
+              {this.renderRedirect()}
               <Switch>
+                <Route path='/landing' exact><Landing /></Route>
                 <Route path='/adminPlayers' exact><AdminPlayers /></Route>
                 <Route path='/adminPlayers/Single'><AdminPlayersSingle /></Route>
                 <Route path='/adminUsers' exact><AdminUsers /></Route>
@@ -73,10 +74,6 @@ class App extends Component {
                 <Route path='/managerMarket'><ManagerMarket /></Route>
                 <Route path='/managerStats'><ManagerStats /></Route>
                 <Route path='/managerLineUps'><ManagerLineUps /></Route>
-
-
-
-
               </Switch>
             </Col>
           </Row>
@@ -84,7 +81,6 @@ class App extends Component {
       </Container>
     );
   }
-
 }
 
 export default App;

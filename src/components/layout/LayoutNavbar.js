@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const LayoutNavbar = (props) => {
 
-    if (props.user === "Admin") {
+    if (props.user === "ADMIN") {
         return (
             <Navbar bg="" variant="dark">
-                <Navbar.Brand className="text-warning mr-5">Navbar Admin</Navbar.Brand>
+                <Navbar.Brand className="text-warning mr-5"></Navbar.Brand>
                 <Nav className="mr-auto">
                     <Link to="/adminPlayers" className="link">Players</Link>
                     <Link to="/adminUsers" className="link">Users</Link>
@@ -16,10 +16,10 @@ const LayoutNavbar = (props) => {
             </Navbar>
         );
     }
-    else if (props.user === "Manager") {
+    else if (props.user === "MANAGER") {
         return (
             <Navbar bg="" variant="dark">
-                <Navbar.Brand className="text-warning mr-5">Navbar Manager</Navbar.Brand>
+                <Navbar.Brand className="text-warning mr-1"></Navbar.Brand>
                 <Nav className="mr-auto">
                     <Link to="/managerTeam" className="link">Team</Link>
                     <Link to="/managerPlayers" className="link">Players</Link>
