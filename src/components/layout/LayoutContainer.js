@@ -14,7 +14,7 @@ import ManagerMatches from '../../components/manager/ManagerMatches';
 import ManagerPlayers from '../../components/manager/ManagerPlayers';
 import ManagerTeam from '../../components/manager/ManagerTeam';
 import ManagerStats from '../../components/manager/ManagerStats';
-import Landing from '../../components/landingPage/landing'
+import Landing from '../landingPage/Landing';
 
 class LayoutContainer extends Component {
   constructor(props) {
