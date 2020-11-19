@@ -14,7 +14,7 @@ import ManagerMatches from '../../components/manager/ManagerMatches';
 import ManagerPlayers from '../../components/manager/ManagerPlayers';
 import ManagerTeam from '../../components/manager/ManagerTeam';
 import ManagerStats from '../../components/manager/ManagerStats';
-import Landing from '../landingPage/Landing';
+import App from '../../App.js';
 
 class LayoutContainer extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class LayoutContainer extends Component {
             </Col>
             <Col xs={4} className="text-center text-white border">
               <h3 className="pt-4">{this.state.username}</h3>
-              <Link to="/landing">
+              <Link to="/app">
                 <Button type="button" value="Manager" onClick={this.props.onClick} className="button" variant="danger">Logout</Button>
               </Link>
             </Col>
@@ -61,7 +61,7 @@ class LayoutContainer extends Component {
               <h1 className="p-3">Layout Component Selected</h1>
               {this.renderRedirect()}
               <Switch>
-                <Route path='/landing' exact><Landing /></Route>
+                <Route path='/app' exact><App /></Route>
                 <Route path='/adminPlayers' exact><AdminPlayers /></Route>
                 <Route path='/adminPlayers/Single'><AdminPlayersSingle /></Route>
                 <Route path='/adminUsers' exact><AdminUsers /></Route>
