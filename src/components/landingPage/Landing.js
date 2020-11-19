@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import LayoutContainer from '../layout/LayoutContainer';
 import './landing.css';
+import FormErrors from './FormErrors.js';
 
 
 class Landing extends Component {
@@ -16,6 +17,10 @@ class Landing extends Component {
             success: false,
             team_id: "",
             type_user: "",
+            formErrors: {username: '', password: ''},
+            usernameValid: false,
+            passwordValid: false,
+            formValid: false,
         }
     }
 
@@ -52,8 +57,45 @@ class Landing extends Component {
         event.preventDefault();
     };
 
-    handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+    handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState(
+            {[name]: value},
+            () => { this.validateField(name, value)}
+        );
+    }
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let usernameValid = this.state.usernameValid;
+        let passwordValid = this.state.passwordValid;
+      
+        switch(fieldName) {
+          case 'username':
+            usernameValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+            fieldValidationErrors.username = usernameValid ? '' : ' should be an email';
+            break;
+          case 'password':
+            passwordValid = value.length >= 8;
+            fieldValidationErrors.password = passwordValid ? '': ' is too short';
+            break;
+          default:
+            break;
+        }
+
+        this.setState({formErrors: fieldValidationErrors,
+                        usernameValid: usernameValid,
+                        passwordValid: passwordValid
+                      }, this.validateForm);
+    }
+      
+    validateForm() {
+        this.setState({formValid: this.state.usernameValid && this.state.passwordValid});
+    }
+
+    errorClass(error) {
+        return(error.length === 0 ? '' : 'has-error');
     }
 
     handleOnClick = () => {
@@ -91,10 +133,11 @@ class Landing extends Component {
                                         <Form.Label className="formLabel">username</Form.Label>
                                         <Form.Control
                                             type="text"
+                                            required
                                             placeholder="enter your username"
-                                            className="formControl"
+                                            className={`formControl ${this.errorClass(this.state.formErrors.username)}`}
                                             value={this.state.username}
-                                            onChange={this.handleChange}
+                                            onChange={(event) => this.handleChange(event)}
                                             name="username"
                                         />
                                     </Form.Group>
@@ -102,19 +145,23 @@ class Landing extends Component {
                                         <Form.Label className="formLabel">password</Form.Label>
                                         <Form.Control
                                             type="password"
+                                            required
                                             placeholder="password"
-                                            className="formControl"
+                                            className={`formControl ${this.errorClass(this.state.formErrors.password)}`}
                                             value={this.state.password}
-                                            onChange={this.handleChange}
+                                            onChange={(event) => this.handleChange(event)}
                                             name="password"
                                         />
                                         <Form.Text className="text-muted">
-                                            <a href="/">you forgot the password?</a>
+                                            <a href="#">you forgot the password?</a>
                                         </Form.Text>
                                     </Form.Group>
-                                    <Button variant="primary" type="submit">
+                                    <Button variant="primary" type="submit" disabled={!this.state.formValid}>
                                         Sign in
                                   </Button>
+                                  <div className="panel panel-default">
+                                    <FormErrors formErrors={this.state.formErrors} />
+                                  </div>
                                 </Form>
                             </Col>
                         </Row>
