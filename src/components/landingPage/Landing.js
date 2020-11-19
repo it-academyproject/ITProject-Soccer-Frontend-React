@@ -3,6 +3,7 @@ import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import LayoutContainer from '../layout/LayoutContainer';
 import './landing.css';
 
+
 class Landing extends Component {
     constructor(props) {
         super(props);
