@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Landing from './components/landingPage/landing.js';
+import Landing from './components/landingPage/Landing.js';
 
 ReactDOM.render(
   <React.StrictMode>
