@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const TOKEN = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDU4NjAyOTAsImlzcyI6InNlY3VyZS1hcGkiLCJzdWIiOiJyYWxjYWxkZUBzb2NjZXIuY29tIiwiZXhwIjoxNjA2NzA2MjkwfQ.bKiFRTF_6DakyMs25aE5untDfUFbVdldeAB7qDeYVrGQzNGoaByfELBu-m9rFITl1_B_ulC6VuE26P2FT_nqpw';
 const API = 'http://217.76.158.200:8181/api';
@@ -62,7 +64,8 @@ class AdminPlayers extends Component {
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>
-                                           <a href="#">Delete</a> ------- <a href="#">View Detail</a>
+                                            <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faTrashAlt} /></Link>
+                                            <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faSearch} /></Link>
                                         </td>
                                     </tr>
                                     <tr>
