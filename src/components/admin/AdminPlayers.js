@@ -16,8 +16,7 @@ class AdminPlayers extends Component {
         }
     }
 
-    componentDidMount() {
-
+    componentWillMount() {
         fetch(API + '/players', {
             method: 'GET',
             headers: {
@@ -29,7 +28,7 @@ class AdminPlayers extends Component {
             .then(response => response.json())
             .then(data => { this.setState({ dataPlayers: data }) });
 
-        fetch(API + '/teams', {
+        /*fetch(API + '/teams', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -38,78 +37,52 @@ class AdminPlayers extends Component {
             },
         })
             .then(response => response.json())
-            .then(data => { this.setState({ dataTeams: data }) });
+            .then(data => { console.log(data) });*/
     }
 
-    componentDidUpdate() {
-        console.log(this.state.dataPlayers);
-        console.log(this.state.dataTeams);
-    }
     render() {
-        return (
-            <Row className="d-flex justify-content-center">
-                <Col xs="8">
-                    <Row>
-                        <Col xs="10" >
-                            <Table striped bordered hover>
-                                <thead className="thead-dark ">
-                                    <tr>
-                                        <th>Player name</th>
-                                        <th>Team</th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>
-                                            <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faTrashAlt} /></Link>
-                                            <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faSearch} /></Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </Col>
-                        <Col xs="2">
-                            <Link to="/adminPlayers/Single" >
-                                <Button variant="warning" size="lg">New Player</Button>
-                            </Link>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        );
+        if (this.state.dataPlayers == null) {
+            return (<h1>Esperando datos</h1>);
+        }
+        else {
+            return (
+                <Row className="d-flex justify-content-center">
+                    <Col xs="8">
+                        <Row>
+                            <Col xs="10" >
+                                <Table striped bordered hover>
+                                    <thead className="thead-dark ">
+                                        <tr>
+                                            <th>Player name</th>
+                                            <th>Team</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.dataPlayers.players.map(player =>
+                                        <tr>
+                                            <td>{player.name}</td>
+                                            <td>Team x</td>
+                                            <td>
+                                                <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faTrashAlt} /></Link>
+                                                <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faSearch} /></Link>
+                                            </td>
+                                        </tr>)}
+                                    </tbody>
+                                </Table>
+                            </Col>
+                            <Col xs="2">
+                                <Link to="/adminPlayers/Single" >
+                                    <Button variant="warning" size="lg">New Player</Button>
+                                </Link>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            );
+        }
+
+
     }
 }
 
