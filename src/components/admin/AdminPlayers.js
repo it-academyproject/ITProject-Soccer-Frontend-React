@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import image from '../img/Admin-Players.png';
 
 const TOKEN = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDU4NjAyOTAsImlzcyI6InNlY3VyZS1hcGkiLCJzdWIiOiJyYWxjYWxkZUBzb2NjZXIuY29tIiwiZXhwIjoxNjA2NzA2MjkwfQ.bKiFRTF_6DakyMs25aE5untDfUFbVdldeAB7qDeYVrGQzNGoaByfELBu-m9rFITl1_B_ulC6VuE26P2FT_nqpw';
-const API = 'http://217.76.158.200:8181/api/players';
+const API = 'http://217.76.158.200:8181/api';
 
 class AdminPlayers extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class AdminPlayers extends Component {
 
     componentDidMount() {
 
-        fetch(API, {
+        fetch(API + '/players', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -28,7 +28,7 @@ class AdminPlayers extends Component {
             .then(response => response.json())
             .then(data => { this.setState({ dataPlayers: data }) });
 
-        fetch(API, {
+        fetch(API + '/teams', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
