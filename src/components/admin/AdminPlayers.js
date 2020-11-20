@@ -16,7 +16,7 @@ class AdminPlayers extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         fetch(API + '/players', {
             method: 'GET',
             headers: {
@@ -28,7 +28,7 @@ class AdminPlayers extends Component {
             .then(response => response.json())
             .then(data => { this.setState({ dataPlayers: data }) });
 
-        /*fetch(API + '/teams', {
+        fetch(API + '/teams', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -37,14 +37,13 @@ class AdminPlayers extends Component {
             },
         })
             .then(response => response.json())
-            .then(data => { console.log(data) });*/
+            .then(data => { this.setState({ dataTeams: data }); console.log(data.teams[0].name) });
     }
 
     render() {
-        if (this.state.dataPlayers == null) {
-            return (<h1>Esperando datos</h1>);
-        }
-        else {
+        if (this.state.dataPlayers !== null && this.state.dataTeams !== null) {
+            console.log( this.state.dataPlayers.players);
+            console.log( this.state.dataTeams.teams);
             return (
                 <Row className="d-flex justify-content-center">
                     <Col xs="8">
@@ -59,10 +58,10 @@ class AdminPlayers extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.dataPlayers.players.map(player =>
-                                        <tr>
+                                        {this.state.dataPlayers.players.map((player, index) =>
+                                        <tr key= {index}>
                                             <td>{player.name}</td>
-                                            <td>Team x</td>
+                                            <td>{this.state.dataTeams.teams[player.team_id -1].name}</td>
                                             <td>
                                                 <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faTrashAlt} /></Link>
                                                 <Link to="/adminPlayers/Single"> <FontAwesomeIcon icon={faSearch} /></Link>
@@ -80,6 +79,10 @@ class AdminPlayers extends Component {
                     </Col>
                 </Row>
             );
+            
+        }
+        else {
+            return (<h1>Esperando datos</h1>);
         }
 
 
