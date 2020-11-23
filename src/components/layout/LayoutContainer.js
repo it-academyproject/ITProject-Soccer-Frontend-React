@@ -57,7 +57,7 @@ class LayoutContainer extends Component {
         </header>
         <section>
           <Row>
-            <Col xs={12} className="bg-dark text-white text-center" style={{ minHeight: 715 }}>
+            <Col xs={12} className="bg-white text-white text-center" style={{ minHeight: 715 }}>
               <h1 className="p-3">Layout Component Selected</h1>
               {this.renderRedirect()}
               <Switch>
